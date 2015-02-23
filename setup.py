@@ -15,7 +15,6 @@ requirements = [
 if not 'TRAVIS_CI' in os.environ:
     requirements.append('PySide')
 
-
 setup(
     name='everpad',
     version=version,
@@ -38,6 +37,7 @@ setup(
             'everpad=everpad.pad.indicator:main'
         ], 'console_scripts': [
             'everpad-lens=everpad.specific.unity.lens:main',
+            'everpad-gnome-search-provider=everpad.specific.gnome.search_provider:main',
             'everpad-provider=everpad.provider.daemon:main',
         ]
     },
@@ -103,7 +103,9 @@ setup(
             'data/unity-lens-everpad.service',
             'data/everpad-provider.service',
             'data/everpad-app.service',
+            'data/gnome-everpad.service'
         ]),
+        ('share/gnome-shell/search-providers', [ 'data/gnome-everpad-search-provider.ini']),
         ('share/kde4/services/', [
             'data/plasma-runner-everpad.desktop',
         ]),
