@@ -267,6 +267,9 @@ class PullNote(BaseSync, ShareNoteMixin):
         resources_ids = []
 
         for resource_ttype in note_ttype.resources or []:
+            if resource_ttype.data.size and not resource_ttype.data.body:
+                resource_ttype = self.note_store.getResource(self.auth_token, 
+                        guid=resource_ttype.guid, withData=True, withRecognition=True, withAttributes=True)
             try:
                 resource = self.session.query(models.Resource).filter(
                     models.Resource.guid == resource_ttype.guid,
@@ -285,7 +288,6 @@ class PullNote(BaseSync, ShareNoteMixin):
                 self.session.add(resource)
                 self.session.commit()
                 resources_ids.append(resource.id)
-
         return resources_ids
 
     def _remove_resources(self, note, resources_ids):
