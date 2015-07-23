@@ -213,6 +213,8 @@ class PullNote(BaseSync, ShareNoteMixin):
 
     def _create_note(self, note_ttype):
         """Create new note"""
+
+        self.app.log("creating %s" % (note_ttype.title))
         note_ttype = self._get_full_note(note_ttype)
 
         note = models.Note(guid=note_ttype.guid)
@@ -238,6 +240,7 @@ class PullNote(BaseSync, ShareNoteMixin):
 
     def _create_conflict(self, note, note_ttype):
         """Create conflict note"""
+        self.app.log("create conflict %s" % (note_ttype.title))
         conflict_note = models.Note()
         conflict_note.from_api(note_ttype, self.session)
         conflict_note.guid = ''
