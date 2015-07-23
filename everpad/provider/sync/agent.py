@@ -132,7 +132,7 @@ class SyncThread(QtCore.QThread):
         except Exception, e:  # maybe log this
             self.session.rollback()
             self._init_db()
-            self.app.log(e)
+            self.app.log_exception(e)
         finally:
             self.sync_state_changed.emit(const.SYNC_STATE_FINISH)
             self.status = const.STATUS_NONE

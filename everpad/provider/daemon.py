@@ -14,6 +14,7 @@ import getpass
 import argparse
 import sys
 import logging
+import traceback
 
 
 class ProviderApp(AppClass):
@@ -82,6 +83,12 @@ class ProviderApp(AppClass):
         self.logger.debug(data)
         if self.verbose:
             print data
+
+    def log_exception(self, e):
+        self.logger.exception(e)
+        if self.verbose:
+            traceback.print_exc()
+
 
     @Slot()
     def terminate(self):
