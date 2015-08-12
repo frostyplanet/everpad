@@ -269,7 +269,7 @@ class PullNote(BaseSync, ShareNoteMixin):
         for resource_ttype in note_ttype.resources or []:
             if resource_ttype.data.size and not resource_ttype.data.body:
                 resource_ttype = self.note_store.getResource(self.auth_token, 
-                        guid=resource_ttype.guid, withData=True, withRecognition=True, withAttributes=True)
+                        guid=resource_ttype.guid, withData=True, withRecognition=True, withAttributes=True, withAlternateData=False)
             try:
                 resource = self.session.query(models.Resource).filter(
                     models.Resource.guid == resource_ttype.guid,
